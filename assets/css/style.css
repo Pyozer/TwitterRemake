@@ -1,0 +1,57 @@
+/*
+|--------------------------------------------------------------------------
+| Page Home
+|--------------------------------------------------------------------------
+*/
+html, body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-weight: 300;
+    font-family: 'Open Sans', 'Lato', sans-serif;
+    background-color: #eee;
+}
+
+.centered {
+    text-align: center;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Page Home
+|--------------------------------------------------------------------------
+*/
+.page_home {
+    height: 100%;
+}
+
+table.showcase {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+table.showcase .showcase-inner {
+    margin: 40px auto 60px;
+    padding: 10px;
+}
+
+table.showcase .showcase-inner h1 {
+    font-size: 55px;
+    text-align: center;
+    font-weight: 300;
+}
+
+table.showcase .showcase-inner h2 {
+    font-size: 24px;
+    text-align: center;
+    font-weight: 300;
+    margin: 1em 0 1em;
+}
+
+.btn-smlarge {
+    padding: 9px 30px;
+}

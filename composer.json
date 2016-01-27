@@ -1,0 +1,15 @@
+{
+  "name": "Pyozer/WebTest",
+  "description": "Projet découverte POO",
+  "minimum-stability": "stable",
+  "authors": [
+    {
+      "name": "Jean-Charles Moussé",
+      "email": "jeancharles.msse@gmail.com"
+    }
+  ],
+  "require": {
+    "michelf/php-markdown": "1.6.0",
+    "abeautifulsite/simpleimage": "2.6.0"
+  }
+}
