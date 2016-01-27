@@ -1,2 +1,3 @@
-# Interminale
-Mini réseau social pour Terminales
+# TwitterRemake
+
+Projet personnel, réalisation du reseau social Twitter
