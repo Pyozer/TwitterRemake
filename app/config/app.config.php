@@ -62,9 +62,10 @@ return array(
 	| Application Default Include Path
 	|--------------------------------------------------------------------------
 	| Détermine le chemin d'accès des inclusions (header, footer..)
-	|
+	| Détermine le chemin d'accès des controllers
 	*/
 
 	'include_paths' => ROOT . '/includes/',
+	'controller_paths' => ROOT . '/app/controllers/',
 
 );

@@ -1,3 +1,4 @@
+/*@import url("fonts.css"); ==> proxima-nova font */
 /*
 |--------------------------------------------------------------------------
 | Page Home
@@ -19,11 +20,6 @@ body {
     text-align: center;
 }
 
-/*
-|--------------------------------------------------------------------------
-| Page Home
-|--------------------------------------------------------------------------
-*/
 .page_home {
     height: 100%;
 }
@@ -45,7 +41,7 @@ table.showcase .showcase-inner h1 {
     font-weight: 300;
 }
 
-table.showcase .showcase-inner h2 {
+table.showcase .showcase-inner h2#text_intro {
     font-size: 24px;
     text-align: center;
     font-weight: 300;
@@ -54,4 +50,138 @@ table.showcase .showcase-inner h2 {
 
 .btn-smlarge {
     padding: 9px 30px;
+}
+
+.page-header {
+    padding-bottom: 15px;
+}
+
+hr {
+    border-top: 1px solid rgba(0,0,0,.2);
+}
+
+.page {
+    padding-top: 150px;
+}
+
+/* ========================== */
+/*      BOOTSTRAP CUSTOM      */
+/* ========================== */
+/*        NavBar Custom       */
+
+.navbar-custom {
+    box-shadow: 0 1px 5px rgba(0,0,0,0.26);
+}
+
+.navbar-custom .navbar-brand {
+    color: rgba(0,0,0,.8);
+    font-weight: 400;
+    font-size: 22px;
+    font-family: 'Lato', sans-serif;
+    padding-top: 20px;
+}
+
+.navbar-brand-centered {
+    position: absolute;
+    right: 50%;
+}
+
+.navbar-custom .navbar-nav .nav-item {
+    font-family: RobotoDraft,Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 22px;
+}
+
+.navbar-custom .navbar-nav .nav-link {
+    color: #777;
+}
+
+.navbar-custom .navbar-nav .nav-link:hover {
+    color: #555;
+}
+
+.navbar-custom .navbar-btn {
+    margin: 0 0 0 15px;
+}
+
+.navbar-custom .navbar-text {
+    font-size: 18px;
+}
+
+/*      Button Outline Custom     */
+
+.btn-primary-outline {
+    color: #0275d8;
+    background-color: transparent;
+    background-image: none;
+    border-color: #0275d8;
+}
+.btn-primary-outline:hover {
+    color: #fff;
+    background-color: #0275d8;
+    border-color: #0275d8;
+}
+
+.btn-secondary-outline {
+    color: #ccc;
+    background-color: transparent;
+    background-image: none;
+    border-color: #ccc;
+}
+.btn-secondary-outline:hover {
+    color: #fff;
+    background-color: #ccc;
+    border-color: #ccc;
+}
+
+.btn-success-outline {
+    color: #5cb85c;
+    background-color: transparent;
+    background-image: none;
+    border-color: #5cb85c;
+}
+.btn-success-outline:hover {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #5cb85c;
+}
+
+.btn-info-outline {
+    color: #5bc0de;
+    background-color: transparent;
+    background-image: none;
+    border-color: #5bc0de;
+}
+.btn-info-outline:hover {
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #5bc0de;
+}
+
+.btn-warning-outline {
+    color: #f0ad4e;
+    background-color: transparent;
+    background-image: none;
+    border-color: #f0ad4e;
+}
+.btn-warning-outline:hover {
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #f0ad4e;
+}
+
+.btn-danger-outline {
+    color: #d9534f;
+    background-color: transparent;
+    background-image: none;
+    border-color: #d9534f;
+}
+.btn-danger-outline:hover {
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d9534f;
+}
+
+/*        Input Custom       */
+.form-control:focus {
+    box-shadow: none;
 }
