@@ -65,41 +65,37 @@ hr {
 }
 
 /* ========================== */
-/*      BOOTSTRAP CUSTOM      */
-/* ========================== */
 /*        NavBar Custom       */
+/* ========================== */
 
 .navbar-custom {
     box-shadow: 0 1px 5px rgba(0,0,0,0.26);
 }
 
 .navbar-custom .navbar-brand {
-    color: rgba(0,0,0,.8);
+    color: rgba(0, 0, 0, .8);
     font-weight: 400;
     font-size: 22px;
     font-family: 'Lato', sans-serif;
-    padding-top: 20px;
+    padding-top: 16px;
+}
+
+.navbar-custom .navbar-brand#littlenavbar {
+    padding-top: 8px;
+    margin-left: -40px;
 }
 
 .navbar-brand-centered {
     position: absolute;
-    right: 50%;
+    left: 50%;
 }
 
-.navbar-custom .navbar-nav .nav-item {
-    font-family: RobotoDraft,Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 22px;
-}
+.navbar-custom .navbar-nav>li>a {
+     color: #777;
+     font-size: 18px;
+ }
 
-.navbar-custom .navbar-nav .nav-link {
-    color: #777;
-}
-
-.navbar-custom .navbar-nav .nav-link:hover {
-    color: #555;
-}
-
-.navbar-custom .navbar-btn {
+.navbar-custom #navbar-btn-noconnect {
     margin: 0 0 0 15px;
 }
 
@@ -107,7 +103,35 @@ hr {
     font-size: 18px;
 }
 
-/*      Button Outline Custom     */
+.navbar-custom .dropdown-menu>li>a {
+    padding: 13px 16px;
+}
+
+.navbar-custom .dropdown-menu>li>a:hover, .navbar-custom .dropdown-menu>li>a:focus {
+    color: #337ab7;
+}
+
+.navbar-custom.navbar .dropdown-menu {
+    border-radius: 0 0 3px 3px;
+    text-align: center;
+}
+
+.navbar-custom.navbar .dropdown-menu .divider {
+    background-color: rgb(212, 212, 212);
+    height: 1px;
+    margin: 0;
+}
+
+.navbar-custom.navbar .dropdown .navbar-img-profil {
+    width: 35px;
+    height: 35px;
+    margin-top: -13px;
+    margin-bottom: -9px;
+}
+
+/* ========================== */
+/*    Button Outline Custom   */
+/* ========================== */
 
 .btn-primary-outline {
     color: #0275d8;
@@ -181,7 +205,103 @@ hr {
     border-color: #d9534f;
 }
 
-/*        Input Custom       */
+/* ========================== */
+/*        Forms Custom        */
+/* ========================== */
+
 .form-control:focus {
     box-shadow: none;
+}
+
+.form-rounded {
+    border-radius: 50px;
+}
+
+/* ========================== */
+/*           Tweet            */
+/* ========================== */
+
+#test {
+    margin-left: -30px;
+    margin-right: -30px;
+}
+.tweet {
+    background-color: #fff;
+    border-radius: 0px;
+    padding: 15px 13px;
+    border-bottom: 2px solid rgba(0,0,0,0.08);
+    border-right: 2px solid rgba(0,0,0,0.08);
+    margin: 20px 0;
+}
+
+.tweet .img-profil-tweet {
+    width: 63px;
+    height: 63px;
+}
+
+.tweet .tweet-user {
+    text-decoration: none;
+    color: #333;
+}
+.tweet .tweet-user .tweet-fullname:hover {
+    text-decoration: underline;
+    color: #3B94D9;
+}
+
+.tweet .tweet-fullname {
+    margin-right: 4px;
+}
+
+.tweet .tweet-username b {
+    font-weight: normal;
+}
+
+.tweet .time:before {
+    content: "\00b7";
+    margin-right: 3px;
+}
+
+.tweet .tweet-text {
+    margin-top: 5px;
+    font-weight: normal;
+    color: #333;
+    font-size: 16px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    
+}
+
+.tweet .tweet-imgpost {
+    max-width: 100%;
+    max-height: 500px;
+    border-radius: 5px;
+    margin: 4px 0;
+}
+
+.tweet .tweet-description {
+    padding: 5px;
+    font-size: 17px;
+}
+
+.tweet-button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    vertical-align: middle;
+    outline: none;
+    margin-top: -4px;
+    margin-right: 3px;
+}
+
+.btn-reply:hover, .btn-reply:focus {
+    color: #3B94D9;
+}
+
+.btn-fav:hover, .btn-fav:focus {
+    color: #FF9800;
+}
+
+.btn-rt:hover, .btn-rt:focus {
+    color: #5c913b;
 }

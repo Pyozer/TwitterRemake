@@ -21,3 +21,11 @@ setlocale (LC_TIME, 'fr_FR.utf8','fra');
 
 /* On charge l'Autolader */
 AutoloaderApp::register();
+
+function connect() {
+    if(!isset($_SESSION['username'])) {
+        return true;
+    } else {
+        return false;
+    }
+}

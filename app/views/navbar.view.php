@@ -9,7 +9,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/" title="Retourner à l'accueil"><img src="/assets/img/logo.png" style="width: 40px;"></a>
+            <a class="navbar-brand navbar-brand-centered" <?= $imgtwitter; ?> href="/" title="Retourner à l'accueil">
+                <img src="/assets/img/logo.svg" style="width: 35px;height: 35px;">
+            </a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
