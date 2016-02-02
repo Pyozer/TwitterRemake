@@ -21,7 +21,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://localhost',
+	'url' => 'localhost',
 	'title' => 'Twitter',
 
 	/*

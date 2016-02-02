@@ -23,7 +23,7 @@ return array(
 	*/
 	'mysql' => array(
 		'host'      => 'localhost',
-		'database'  => 'sitetest',
+		'database'  => 'twitter',
 		'username'  => 'root',
 		'password'  => '',
 		'charset'   => 'utf8',

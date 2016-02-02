@@ -10,7 +10,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand navbar-brand-centered" <?= $imgtwitter; ?> href="/" title="Retourner à l'accueil">
-                <img src="/assets/img/logo.svg" style="width: 35px;height: 35px;">
+                <img src="/assets/img/logo/logo.svg" style="width: 35px;height: 35px;">
             </a>
         </div>
 

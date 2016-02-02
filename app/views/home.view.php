@@ -1,10 +1,11 @@
 <?php
 use Core\Config;
+
 require Config::get('app.include_paths') . 'header.php';
 ?>
 
 <div class="page_home">
-    <table class="showcase last-showcase no-next-arrow share">
+    <table class="showcase">
         <tbody>
             <tr>
                 <td>

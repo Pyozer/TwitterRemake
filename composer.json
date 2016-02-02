@@ -10,6 +10,7 @@
   ],
   "require": {
     "michelf/php-markdown": "1.6.0",
-    "abeautifulsite/simpleimage": "2.6.0"
+    "abeautifulsite/simpleimage": "2.6.0",
+    "badcow/lorem-ipsum": "v1.1.1"
   }
 }

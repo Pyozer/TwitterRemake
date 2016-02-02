@@ -3,6 +3,7 @@
  * Controller de la barre de navigation
  */
 use Core\Config;
+use App\Vendor\InfoUser;
 
 $title_site = Config::get('app.title');
 
@@ -21,11 +22,22 @@ if(!connect()) {
         $href = "/connexion.php";
         $textBtn = "Se connecter";
         $imgtwitter = null;
+    } else {
+        $text = "";
+        $href = "";
+        $textBtn = "";
+        $imgtwitter = "";
     }
     $template_no_connect = "<p class=\"navbar-text navbar-right\">{$text} <a type=\"button\" href=\"{$href}\" class=\"btn btn-primary-outline btn-smlarge navbar-btn\" id=\"navbar-btn-noconnect\">{$textBtn}</a></p>";
 
     $onglets = $template_no_connect;
 } else {
+    /* On récupère les infos de l'utilisateur */
+    $username = $_SESSION['username'];
+    $user = InfoUser::getInstance($DB_con, $username);
+    $infouser = $user->getInfo();
+
+
     $activehome = ($id_page == "index") ? 'class="active"' : "";
     $activenotif = ($id_page == "notification") ? 'class="active"' : "";
     $activemsg = ($id_page == "message") ? 'class="active"' : "";
@@ -37,30 +49,33 @@ if(!connect()) {
         <li '.$activemsg.'><a href="/messages.php" title="Mes messages" id="liamis"><i class="fa fa-envelope"></i> Messages</a></li>
     </ul>
     <a type="button" class="btn btn-primary-outline navbar-btn navbar-right"><i class="fa fa-paper-plane"></i> Tweeter</a>
-    <ul class="nav navbar-nav navbar-right" style="margin-right: 10px;">    
+    <ul class="nav navbar-nav navbar-right" style="margin-right: 10px;">
         <li class="dropdown">
             <a href="javascript:void(0)" data-target="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <img class="img-rounded navbar-img-profil" src="http://interminale.fr.nf/images/profil/02192cc8dbd3607529cc54f61c9763ef128e0e26.jpg"> <i class="fa fa-angle-down"></i>
+                <img class="img-circle navbar-img-profil" src="http://interminale.fr.nf/images/profil/02192cc8dbd3607529cc54f61c9763ef128e0e26.jpg"></i>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="/profil" title="Votre profil"><strong>Jean-Charles Moussé</strong><br/><small>Voir mon profil</small></a></li>
+                <li>
+                    <a href="/profil.php?user=' . $infouser->pseudo . '" title="Votre profil">
+                        <strong>' . $infouser->prenom . ' ' . $infouser->nom . '</strong><br/>
+                        <small>Voir mon profil</small>
+                    </a>
+                </li>
                 <li role="separator" class="divider"></li>
-                <li><a href="/parametres" title="Paramètre du compte">Paramètres</a></li>
-                <li><a href="/deconnexion?logout=true" title="Déconnexion">Déconnexion</a></li>
+                <li><a href="/parametres.php" title="Paramètre du compte">Paramètres</a></li>
+                <li><a href="/deconnexion.php" title="Déconnexion">Déconnexion</a></li>
             </ul>
         </li>
     </ul>
     <form class="navbar-form navbar-right" role="search">
-        <div class="form-group">
+        <div class="form-group has-feedback">
             <input type="text" class="form-control form-rounded" placeholder="Rechercher...">
+            <span class="glyphicon glyphicon-search form-control-feedback"></span>
         </div>
     </form>';
     $imgtwitter = 'id="littlenavbar"';
 }
 
-//} else {
-
-
-//}
-
-require Config::get('view.paths') . 'navbar.view.php';
+if($id_page != "logout") {
+    require Config::get('view.paths') . 'navbar.view.php';
+}
