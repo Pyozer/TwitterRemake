@@ -116,7 +116,7 @@ class User {
         $checkemail->execute(array(
             'email' => $email
         ));
-        if ($checkemail->rowCount() > 0) {
+        if($checkemail->rowCount() > 0) {
             return true;
         } else {
             return false;
@@ -132,8 +132,35 @@ class User {
         $checkpseudo->execute(array(
             'pseudo' => $pseudo
         ));
-        if ($checkpseudo->rowCount() > 0) {
+        if($checkpseudo->rowCount() > 0) {
             return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Vérifie si le mot de passe actuel d'un utilisateur est valide
+     * @param $iduser string
+     * @param $password string
+     * @return bool
+     */
+    public function checkpassword($iduser, $password) {
+        /* Récupère le mot de passe de l'utilisateur en fonction de son id */
+        $getpassword = $this->db->prepare("SELECT password FROM users WHERE id=:userid LIMIT 1");
+        $getpassword->execute(array(
+            'userid'=> $iduser
+        ));
+        /* On vérifie que l'utilisateur existe */
+        if($getpassword->rowCount() > 0) {
+            /* On stock le mdp sous forme d'objet */
+            $userInfo = $getpassword->fetch(PDO::FETCH_OBJ);
+            /* On vérifie que le mot de passe entré correspond */
+            if(password_verify($password, $userInfo->password)) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }

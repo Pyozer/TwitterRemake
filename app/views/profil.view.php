@@ -5,6 +5,11 @@ require Config::get('app.include_paths') . 'header.php';
 require Config::get('app.controller_paths') . 'Navbar.php';
 ?>
 <div class="page">
+    <div class="row"> <!-- Bannière -->
+        <div class="col-xs-12" style="max-height: 400px;overflow: hidden;">
+            <img src="https://pbs.twimg.com/profile_banners/3383462333/1437334100/1500x500" style="width: 100%;">
+        </div>
+    </div>
     <div class="row">
         <div class="col-sm-3">
             <div class="userinfo centered" style="padding: 30px 25px 13px 25px;background-color: #2E3F51;color: #fafafa;border-bottom: 1px solid #23303E;">
@@ -40,10 +45,10 @@ require Config::get('app.controller_paths') . 'Navbar.php';
                             <p><strong><?= $nbrTweets; ?></strong><br> Tweets</p>
                         </div>
                         <div class="col-xs-4" style="border-right: 2px solid #B9B9B9;">
-                            <p><strong><?= $nbrFollowers; ?></strong><br> Abonnés</p>
+                            <p><strong><?= $nbrFollowers; ?></strong><br> Followers</p>
                         </div>
                         <div class="col-xs-4">
-                            <p><strong><?= $nbrFollow; ?></strong><br> Abonnements</p>
+                            <p><strong><?= $nbrFollow; ?></strong><br> Following</p>
                         </div>
                     </div>
                 </div>
@@ -81,14 +86,14 @@ require Config::get('app.controller_paths') . 'Navbar.php';
                         <div class="col-xs-3">
                             <div class="stat-user-bar" style="padding: 25px 0 20px 0;">
                                 <p style="margin: 0;">
-                                    <strong><?= $nbrFollowers; ?></strong><br />Abonnés
+                                    <strong><?= $nbrFollowers; ?></strong><br />Followers
                                 </p>
                             </div>
                         </div>
                         <div class="col-xs-3">
                             <div class="stat-user-bar" style="padding: 25px 0 20px 0;">
                                 <p style="margin: 0;">
-                                    <strong><?= $nbrFollow; ?></strong><br />Abonnements
+                                    <strong><?= $nbrFollow; ?></strong><br />Following
                                 </p>
                             </div>
                         </div>
@@ -96,7 +101,7 @@ require Config::get('app.controller_paths') . 'Navbar.php';
                 </div>
                 <div class="all-tweets" style="margin-top: 25px;"> <!-- Tous les tweets -->
                     <div class="row">
-                        <?php require Config::get('app.controller_paths') . 'AllTweets.php'; ?>
+                        <?php require Config::get('app.controller_paths') . 'UserTweets.php'; ?>
                     </div>
                 </div>
             </div>

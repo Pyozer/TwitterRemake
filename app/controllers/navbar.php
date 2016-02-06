@@ -32,11 +32,9 @@ if(!connect()) {
 
     $onglets = $template_no_connect;
 } else {
-    /* On récupère les infos de l'utilisateur */
-    $username = $_SESSION['username'];
-    $user = InfoUser::getInstance($DB_con, $username);
-    $infouser = $user->getInfo();
-
+    /* On récupère les infos propre à notre utilisateur */
+    $user = InfoUser::getInstance($DB_con, $_SESSION['username'], true);
+    $info_user = $user->getInfo();
 
     $activehome = ($id_page == "index") ? 'class="active"' : "";
     $activenotif = ($id_page == "notification") ? 'class="active"' : "";
@@ -56,8 +54,8 @@ if(!connect()) {
             </a>
             <ul class="dropdown-menu">
                 <li>
-                    <a href="/profil.php?user=' . $infouser->pseudo . '" title="Votre profil">
-                        <strong>' . $infouser->prenom . ' ' . $infouser->nom . '</strong><br/>
+                    <a href="/profil.php?user=' . $info_user->pseudo . '" title="Votre profil">
+                        <strong>' . $info_user->prenom . ' ' . $info_user->nom . '</strong><br/>
                         <small>Voir mon profil</small>
                     </a>
                 </li>

@@ -50,6 +50,7 @@ function passwordhash($passwordtohash)
 {
     $options = [
         'cost' => 9,
+        'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
     ];
     $passwordhashed = password_hash($passwordtohash, PASSWORD_BCRYPT, $options);
     return $passwordhashed;

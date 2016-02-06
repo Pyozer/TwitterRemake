@@ -14,19 +14,8 @@ class UserTweets extends Tweets {
         return self::$_instance;
     }
 
-    /**
-     * Récupère le nombre de tweets posté par notre utilisateur
-     */
-    public function getNbrTweets() {
-        $userid = $this->userid;
-        /* On sélectionne les tweets qui ont pour auteur notre utilisateur */
-        $getTweets = $this->db->prepare("SELECT t.id FROM tweets as t LEFT JOIN users as u ON t.auteur_id = u.id WHERE t.auteur_id=:userid");
-        $getTweets->execute(array(
-            'userid' => $userid
-        ));
-        /* On compte le nombre de résultat */
-        $nbrtweets = $getTweets->rowCount();
-
-        return $nbrtweets;
+    public function AddTweet($tweet, $media = null) {
+        //Ajout du tweet à la BDD
     }
+
 }

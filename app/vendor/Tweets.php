@@ -1,6 +1,5 @@
 <?php
 namespace App\Vendor;
-
 use \PDO;
 /**
  * Class Tweets
@@ -10,10 +9,10 @@ class Tweets {
 
     protected $db;
     protected static $_instance = null;
-    public $userid = "";
+    /* Contient l'ID de l'utilisateur */
+    public $userid;
 
     protected function __construct($DB_con, $userid) {
-        /* On défini la bdd */
         $this->db = $DB_con;
         $this->userid = $userid;
     }
@@ -25,9 +24,9 @@ class Tweets {
         return self::$_instance;
     }
 
-
     /**
      * Récupère tous les tweets d'un utilisateur
+     * @return $alltweets array
      */
     public function getUserTweets() {
         $userid = $this->userid;
@@ -43,18 +42,23 @@ class Tweets {
     }
 
     /**
-     * Récupère tous les tweets pour le fils d'actualité
+     * Récupère tous les tweets des utilisateurs qu'il suit
+     * @return $alltweets array
      */
-    public function getTweets() {
-        $userid = $this->userid;
-
-        $getTweets = $this->db->prepare("SELECT t.*, u.id, u.pseudo, u.nom, u.prenom FROM tweets as t LEFT JOIN users as u ON t.auteur_id = u.id WHERE auteur_id=:userid");
+    public function getAllTweets() {
+        /* On récupère les ID que notre user follow */
+        $user = InfoUser::getInstance($this->db, $this->userid);
+        $allid = $user->getUserIdFollow();
+        /* On ajoute notre ID à la liste */
+        $allid[] = $this->userid;
+        /* On selectionne tous les tweets appartement à la liste des ID */
+        $getTweets = $this->db->prepare("SELECT t.*, u.id, u.pseudo, u.nom, u.prenom FROM tweets as t LEFT JOIN users as u ON t.auteur_id = u.id WHERE auteur_id REGEXP(:ids) ORDER BY date DESC");
         $getTweets->execute(array(
-            'userid' => $userid
+            'ids' => implode('|', $allid)
         ));
         $getTweets->setFetchMode(PDO::FETCH_OBJ);
         $alltweets = $getTweets->fetchAll();
-
+        /* On retourne les tweets */
         return $alltweets;
     }
 }

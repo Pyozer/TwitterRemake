@@ -15,13 +15,12 @@ App::setTitle('Accueil');
 $id_page = "index";
 
 /* On récupère les infos de l'utilisateur */
-$username = $_SESSION['username'];
-$userid = $_SESSION['userid'];
-$user = InfoUser::getInstance($DB_con, $username);
-$infouser = $user->getInfo();
-
-$usertweet = \App\Vendor\UserTweets::getInstance($DB_con, $userid);
-$nbrTweets = $usertweet->getNbrTweets();
+$user = InfoUser::getInstance($DB_con, $_SESSION['userid']);
+$info_profil = $user->getInfo();
+$nbrTweets = $user->getNbrTweets();
+$nbrFollowers = $user->getNbrFollowers();
+$nbrFollow = $user->getNbrFollow();
+$nbrMedia = $user->getNbrMedia();
 
 //On importe la vue
 require Config::get('view.paths') . 'index.view.php';

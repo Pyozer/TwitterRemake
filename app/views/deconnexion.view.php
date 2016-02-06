@@ -3,7 +3,7 @@ use Core\Config;
 
 require Config::get('app.include_paths') . 'header.php';
 
-require Config::get('app.controller_paths') . 'navbar.php';
+require Config::get('app.controller_paths') . 'Navbar.php';
 ?>
 <!-- On met un loader d'environ 1 seconde -->
 <META http-equiv="refresh" content="1; URL=/home.php">

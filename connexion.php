@@ -19,7 +19,9 @@ if(isset($_POST['SubmitButton'])) {
     $encoding = 'utf-8';
     $username = htmlspecialchars(trim($_POST['InputUsername']), ENT_QUOTES, $encoding);
     $password = htmlspecialchars(trim($_POST['InputPassword']), ENT_QUOTES, $encoding);
-    if(!$stayonline = htmlspecialchars($_POST['InputStayOnline'])) {
+    if(isset($_POST['InputStayOnline'])) {
+        $stayonline = htmlspecialchars($_POST['InputStayOnline']);
+    } else {
         $stayonline = null;
     }
     /* On vérifie que tous les champs sont saisies */
@@ -38,7 +40,8 @@ if(isset($_POST['SubmitButton'])) {
         if($user->login($username, $password, $stayonline)) {
             User::redirect('/');
         } else {
-            setFlash("Identifiant ou mot de passe incorrect :/", "danger");
+            $errors['LoginFail'] = "Identifiant ou mot de passe incorrect :/";
+            setFlash($errors['LoginFail'], "danger");
         }
     }
 }
