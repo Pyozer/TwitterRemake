@@ -22,5 +22,11 @@ $nbrFollowers = $user->getNbrFollowers();
 $nbrFollow = $user->getNbrFollow();
 $nbrMedia = $user->getNbrMedia();
 
+if(!isset($_SESSION['imgprofil'])) {
+    $user = User::getInstance($DB_con);
+    $_SESSION['imgprofil'] = $user->getUserImg($_SESSION['userid']);
+}
+
+
 //On importe la vue
 require Config::get('view.paths') . 'index.view.php';

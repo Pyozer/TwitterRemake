@@ -5,6 +5,7 @@ require Config::get('app.include_paths') . 'header.php';
 require Config::get('app.controller_paths') . 'Navbar.php';
 ?>
 <div class="page">
+    <?php flash(); ?>
     <div class="row"> <!-- Bannière -->
         <div class="col-xs-12" style="max-height: 400px;overflow: hidden;">
             <img src="https://pbs.twimg.com/profile_banners/3383462333/1437334100/1500x500" style="width: 100%;">
@@ -14,7 +15,7 @@ require Config::get('app.controller_paths') . 'Navbar.php';
         <div class="col-sm-3">
             <div class="userinfo centered" style="padding: 30px 25px 13px 25px;background-color: #2E3F51;color: #fafafa;border-bottom: 1px solid #23303E;">
                 <div class="user-imgprofil">
-                    <img class="img-circle" src="https://yt3.ggpht.com/-sW50T4z6KE4/AAAAAAAAAAI/AAAAAAAAAAA/ciHc2W9nqlM/s88-c-k-no/photo.jpg" style="width: 80px;height: 80px;">
+                    <img class="img-circle" src="<?= $imgprofil; ?>" style="width: 80px;height: 80px;">
                 </div>
                 <div class="user_fullname" style="margin-top: 15px;">
                     <p><strong><?= $info_profil->prenom . " " . $info_profil->nom; ?></strong>
@@ -24,7 +25,7 @@ require Config::get('app.controller_paths') . 'Navbar.php';
                     <p><small>@<?= $info_profil->pseudo; ?></small>
                     </p>
                 </div>
-                <div clas="user_bio" style="text-align: left;color: #ffffff;font-size: 15px;">
+                <div clas="user_bio" style="text-align: left;color: #ffffff;font-size: 15px;word-wrap: break-word;word-break: break-word;">
                     <p><?= $info_profil->bio; ?></p>
                 </div>
                 <div class="follow_user" style="margin-top: 20px;">
@@ -32,8 +33,16 @@ require Config::get('app.controller_paths') . 'Navbar.php';
                         <div class="col-xs-10 col-sm-6 col-xs-offset-1 col-sm-offset-3">
                             <?php if($info_profil->id == $_SESSION['userid']) { ?>
                                 <a class="btn btn-default-outline btn-block btn-smlarge" href="/edit-profil.php" style="border-radius: 50px;">Modifier mon profil</a>
+                            <?php } elseif($follow->checkFollow() == true) { ?>
+                                <form method="post">
+                                    <input type="hidden" name="ProfilUserid" value="<?= $info_profil->id; ?>" />
+                                    <button type="submit" class="btn btn-default-outline btn-block btn-smlarge" id="follow" name="SubmitUnFollow" style="border-radius: 50px;">Ne plus suivre</button>
+                                </form>
                             <?php } else { ?>
-                                <button class="btn btn-default-outline btn-block btn-smlarge" id="follow" data-iduser="<?= $info_profil->id; ?>" style="border-radius: 50px;">Suivre</button>
+                                <form method="post">
+                                    <input type="hidden" name="ProfilUserid" value="<?= $info_profil->id; ?>" />
+                                    <button type="submit" class="btn btn-default-outline btn-block btn-smlarge" id="follow" name="SubmitFollow" style="border-radius: 50px;">Suivre</button>
+                                </form>
                             <?php } ?>
                         </div>
                     </div>

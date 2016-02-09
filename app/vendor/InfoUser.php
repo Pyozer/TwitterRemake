@@ -127,6 +127,7 @@ class InfoUser {
         ));
         /* On compte le nombre de résultat */
         $InfoFollow = $getInfoFollow->fetchAll(PDO::FETCH_ASSOC);
+        $allids = array();
         foreach($InfoFollow as $key => $value) {
             $allids[] = $value['id'];
         }

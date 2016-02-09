@@ -6,6 +6,10 @@
 | Fichier contenant toutes les fonctions simple
 | Possibilité d'être appelé partout
 */
+use Upload\File;
+use Upload\Storage\FileSystem;
+use Upload\Validation\Mimetype;
+use Upload\Validation\Size;
 
 /**
  * Vérifie si un utilisateur est connecté
@@ -95,4 +99,26 @@ function AffDate($date){
     } else { /* + de 2 jours */
         return date('d/m', $date);
     }
+}
+
+/*
+ * Sauvegarde une image de tpye base64 (string)
+ * vers un fchier jpeg
+ */
+function base64_to_png($base64_string, $name_file, $dirtosave = "/img/profils/") {
+    $img = $base64_string;
+    $img = str_replace('data:image/png;base64,', '', $img);
+    $img = str_replace(' ', '+', $img);
+    $data = base64_decode($img);
+    $file = ROOT . $dirtosave . $name_file . '.png';
+    $success = file_put_contents($file, $data);
+    print $success ? $file : 'Unable to save the file.';
+}
+
+/*
+ * Upload une image vers un dossier
+ * (Vérifie aussi)
+ */
+function upload_image($name, $newname = null, $dirtosave = "/img/profils/") {
+
 }

@@ -9,13 +9,29 @@
     <script src="/assets/js/ripples.js"></script>
     <!-- TimeAgo (custom) -->
     <script src="/assets/js/jquery.timeago.js" type="text/javascript"></script>
+    <script src="/assets/js/twitter.js" type="text/javascript"></script>
+    <script src="/assets/js/twitter.js" type="text/javascript"></script>
     <!-- Initialisation des scripts -->
     <script type="text/javascript">
-        jQuery(document).ready(function() {
+        jQuery(document).ready(function($) {
             /* On initialise Material Design */
             $.material.init();
             /* On initialise TimeAgo */
             jQuery("time.timeago").timeago();
+            /* Initialise le compteur de caractère */
+            $('#inputBio').simplyCountable({
+                counter: '#counter',
+                countType: 'characters',
+                maxCount: 160,
+                strictMax: true,
+                countDirection: 'up',
+                safeClass: 'safe',
+                overClass: 'over',
+                thousandSeparator: ' ',
+                onOverCount: function(count, countable, counter){},
+                onSafeCount: function(count, countable, counter){},
+                onMaxCount: function(count, countable, counter){}
+            });
         });
     </script>
     </body>

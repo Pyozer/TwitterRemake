@@ -4,6 +4,7 @@
  */
 use Core\Config;
 use App\Vendor\InfoUser;
+use App\Vendor\User;
 
 $title_site = Config::get('app.title');
 
@@ -32,6 +33,10 @@ if(!connect()) {
 
     $onglets = $template_no_connect;
 } else {
+    if(!isset($_SESSION['imgprofil'])) {
+        $user = User::getInstance($DB_con);
+        $_SESSION['imgprofil'] = $user->getUserImg($_SESSION['userid']);
+    }
     /* On récupère les infos propre à notre utilisateur */
     $user = InfoUser::getInstance($DB_con, $_SESSION['username'], true);
     $info_user = $user->getInfo();
@@ -50,7 +55,7 @@ if(!connect()) {
     <ul class="nav navbar-nav navbar-right" style="margin-right: 10px;">
         <li class="dropdown">
             <a href="javascript:void(0)" data-target="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <img class="img-circle navbar-img-profil" src="http://interminale.fr.nf/images/profil/02192cc8dbd3607529cc54f61c9763ef128e0e26.jpg"></i>
+                <img class="img-circle navbar-img-profil" src="' . $_SESSION["imgprofil"] . '"></i>
             </a>
             <ul class="dropdown-menu">
                 <li>

@@ -13,7 +13,6 @@ class User {
     private static $_instance = null;
 
     private function __construct($DB_con) {
-        /* On défini la bdd */
         $this->db = $DB_con;
     }
 
@@ -24,7 +23,6 @@ class User {
         return self::$_instance;
     }
 
-
     /**
      * Enregistre un utilisateur à la base de donnée
      * @param $pseudo string
@@ -34,26 +32,26 @@ class User {
      * @param $password string
      * @return bool
      */
-    public function register($pseudo, $prenom, $nom, $email, $password) {
+    public function register($pseudo, $prenom, $nom, $email, $password, $imgname) {
         /* On hash le mot de passe */
         $passwordhashed = passwordhash($password);
         /* On défini la date d'inscription */
         $dateinscription = date('Y-m-d');
         $lastco = date("Y-m-d H:i:s");
 
-        $registeruser = $this->db->prepare("INSERT INTO users (pseudo, nom, prenom, email, password, dateinscription, lastco) VALUES(:pseudo, :nom, :prenom, :email, :password, :dateinscription, :lastco)");
+        $registeruser = $this->db->prepare("INSERT INTO users (pseudo, nom, prenom, email, password, imgprofil, dateinscription, lastco) VALUES(:pseudo, :nom, :prenom, :email, :password, :imgprofil, :dateinscription, :lastco)");
         $registeruser->execute(array(
             'pseudo' => $pseudo,
             'nom' => $nom,
             'prenom' => $prenom,
             'email' => $email,
             'password' => $passwordhashed,
+            'imgprofil' => $imgname,
             'dateinscription' => $dateinscription,
             'lastco' => $lastco
         ));
         return true;
     }
-
 
     /**
      * Connecte un utilisateur grâce à son email/pseudo et mot de passe
@@ -91,7 +89,6 @@ class User {
                 $_SESSION['userprenom'] = $userRow->prenom;
                 $_SESSION['usernom'] = $userRow->nom;
                 $_SESSION['username'] = $userRow->pseudo;
-
                 /* Si la checkbox "gardé la connexion" est coché, on défini un cookie */
                 if($stayonline != null) {
                     $contentcook = $userRow->id."===".sha1($username.$_SERVER['REMOTE_ADDR']);
@@ -167,11 +164,60 @@ class User {
     }
 
     /**
+     * @param $pseudo string - Renvoi l'id de l'utilisateur
+     * @return bool
+     */
+    public function getUserid($pseudo) {
+        $getid = $this->db->prepare("SELECT id FROM users WHERE pseudo=:pseudo");
+        $getid->execute(array(
+            'pseudo' => $pseudo
+        ));
+        if($getid->rowCount() > 0) {
+            $iduser = $getid->fetch(PDO::FETCH_OBJ);
+            return $iduser->id;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Renvoi l'image de profil d'un utilisateur
+     * @param $userid string
+     * @return string
+     */
+    public function getUserImg($userid) {
+        // Chemin d'accès des photos de profils
+        $dir = Config::get('image.imgprofil_path');
+        // On récupère la valeur de l'img dans la BDD
+        $getimgname = $this->db->prepare("SELECT imgprofil FROM users WHERE id=:id LIMIT 1");
+        $getimgname->execute(array(
+            'id' => $userid
+        ));
+        $data = $getimgname->fetch(PDO::FETCH_OBJ);
+        // Si il y a un résultat non vide
+        if($getimgname->rowCount() > 0 && !empty($data->imgprofil)) {
+
+            $imgsqlname = $data->imgprofil;
+
+            $filename = $dir . $imgsqlname;
+            // On vérifie que l'image existe
+            if (file_exists(ROOT . $filename)) {
+                return $filename;
+            } else {
+                return $dir . 'profil_default.png';
+            }
+        } else {
+            return $dir . 'profil_default.png';
+        }
+    }
+
+    /**
      * Redirige un utilisateur vers l'url demandé
      * @param $url string
      */
     public static function redirect($url) {
-        return header('Location: ' . $url);
+        header('Location: ' . $url);
+        exit;
     }
 
     /**

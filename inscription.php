@@ -2,6 +2,7 @@
 use App\App;
 use App\Vendor\User;
 use Core\Config;
+use Identicon\Identicon;
 
 require 'core/init.php';
 
@@ -70,11 +71,17 @@ if(isset($_POST['submitRegister'])) {
         $nom = ucwords(mb_strtolower($nom, 'UTF-8'));
         $prenom = ucwords(mb_strtolower($prenom, 'UTF-8'));
 
-        if($user->register($pseudo, $prenom, $nom, $email, $password)) {
+        /* On lui génère une image de profil */
+        $identicon = new Identicon();
+        $imageDataUri = $identicon->getImageDataUri($pseudo);
+        base64_to_png($imageDataUri, $pseudo);
+        $imgname = $pseudo . ".png";
+        /* On enregistre notre utilisateur */
+        if($user->register($pseudo, $prenom, $nom, $email, $password, $imgname)) {
             /* Si l'inscription a bien eu lieu, on le connecte */
             $user->login($pseudo, $password);
             /* On rédirige l'utilisateur à l'index */
-            $user->redirect('/');
+            $user::redirect('/');
         } else {
             setFlash("Une erreur est survenur lors de votre inscription :/", "danger");
         }
