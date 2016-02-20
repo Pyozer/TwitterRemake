@@ -46,6 +46,7 @@ $nbrMedia = $profil_user->getNbrMedia();
 
 $user = User::getInstance($DB_con);
 $imgprofil = $user->getUserImg($info_profil->id);
+$banniere = $info_profil->banniere;
 
 //On importe la vue
 require Config::get('view.paths') . 'profil.view.php';

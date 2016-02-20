@@ -22,6 +22,10 @@ body {
     text-align: center;
 }
 
+a.nolink {
+    color: inherit;
+}
+
 /*
 |--------------------------------------------------------------------------
 | Page Home, Register And Login

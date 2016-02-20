@@ -51,7 +51,7 @@ if(!connect()) {
         <li '.$activenotif.'><a href="/notifications.php" title="Mes notifications"><i class="fa fa-bell"></i> Notifications</a></li>
         <li '.$activemsg.'><a href="/messages.php" title="Mes messages" id="liamis"><i class="fa fa-envelope"></i> Messages</a></li>
     </ul>
-    <a type="button" class="btn btn-primary-outline navbar-btn navbar-right"><i class="fa fa-paper-plane"></i> Tweeter</a>
+    <a type="button" class="btn btn-primary-outline navbar-btn navbar-right" data-toggle="modal" data-target="#newTweet"><i class="fa fa-paper-plane"></i> Tweeter</a>
     <ul class="nav navbar-nav navbar-right" style="margin-right: 10px;">
         <li class="dropdown">
             <a href="javascript:void(0)" data-target="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -79,6 +79,7 @@ if(!connect()) {
     $imgtwitter = 'id="littlenavbar"';
 }
 
+/* Si on est pas sur la page de deconnexion */
 if($id_page != "logout") {
     require Config::get('view.paths') . 'navbar.view.php';
 }

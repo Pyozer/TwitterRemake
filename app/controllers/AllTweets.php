@@ -6,12 +6,13 @@
  */
 use Core\Config;
 use App\Vendor\Tweets;
+use App\Vendor\User;
 
 $userid = $_SESSION['userid'];
 $tweets = Tweets::getInstance($DB_con, $userid);
 /* On récupère tous les tweets */
 $alltweets = $tweets->getAllTweets();
-
+$user = User::getInstance($DB_con);
 /* On affiche ensuite les tweets */
 foreach ($alltweets as $keyPrimary => $tweet) {
 	$href = "/profil.php?user=" . $tweet->pseudo;
@@ -26,13 +27,13 @@ foreach ($alltweets as $keyPrimary => $tweet) {
 
 	$tweet_text = $tweet->tweet;
 
-	$img_profil = "https://pbs.twimg.com/profile_images/671484118035734532/KBNaQRTb_400x400.png";
+	$img_profil = $user->getUserImg($tweet->user_id);
 
 	$img_tweet = $tweet->media_tweet;
 
 	$nbr_rt = $tweet->nbr_rt;
-	$nbr_fav = $tweet->nbr_fav;
-	$nbr_reply = $tweet->nbr_reply;
+	$nbr_fav = $tweets->getNbrFav($tweet->id);
+	$nbr_reply = $tweets->getNbrReply($tweet->id);
 
 	require Config::get('view.paths') . '/templates/tweet.template.php';
 }

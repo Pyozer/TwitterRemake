@@ -9,14 +9,22 @@ require Config::get('app.controller_paths') . 'Navbar.php';
         <div class="col-sm-3">
             <div class="userinfo centered" style="padding: 30px 25px 13px 25px;background-color: #2E3F51;color: #fafafa;border-bottom: 1px solid #23303E;">
                 <div class="user-imgprofil">
-                    <img class="img-circle" src="<?= $_SESSION['imgprofil']; ?>" style="width: 80px;height: 80px;">
+                    <a href="/profil.php?user=<?= $info_profil->pseudo; ?>" class="nolink">
+                        <img class="img-circle" src="<?= $_SESSION['imgprofil']; ?>" style="width: 80px;height: 80px;">
+                    </a>
                 </div>
                 <div class="user_fullname" style="margin-top: 15px;">
-                    <p><strong><?= $info_profil->prenom . " " . $info_profil->nom; ?></strong>
+                    <p>
+                        <a href="/profil.php?user=<?= $info_profil->pseudo; ?>" class="nolink">
+                            <strong><?= $info_profil->prenom . " " . $info_profil->nom; ?></strong>
+                        </a>
                     </p>
                 </div>
                 <div class="user_username" style="margin-top: -10px;">
-                    <p><small>@<?= $info_profil->pseudo; ?></small>
+                    <p>
+                        <a href="/profil.php?user=<?= $info_profil->pseudo; ?>" class="nolink">
+                            <small>@<?= $info_profil->pseudo; ?></small>
+                        </a>
                     </p>
                 </div>
                 <div clas="user_bio" style="text-align: left;color: #ffffff;font-size: 15px;word-wrap: break-word;word-break: break-word;">

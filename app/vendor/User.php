@@ -189,22 +189,34 @@ class User {
         // Chemin d'accès des photos de profils
         $dir = Config::get('image.imgprofil_path');
         // On récupère la valeur de l'img dans la BDD
-        $getimgname = $this->db->prepare("SELECT imgprofil FROM users WHERE id=:id LIMIT 1");
+        $getimgname = $this->db->prepare("SELECT imgprofil, pseudo FROM users WHERE id=:id LIMIT 1");
         $getimgname->execute(array(
             'id' => $userid
         ));
         $data = $getimgname->fetch(PDO::FETCH_OBJ);
-        // Si il y a un résultat non vide
-        if($getimgname->rowCount() > 0 && !empty($data->imgprofil)) {
+        // On défini le nom de l'image généré à l'inscription
+        $imgnamealea = $data->pseudo . ".png";
+        // Si il y a un résultat
+        if($getimgname->rowCount() > 0) {
+            // On vérifie que le résultat n'est pas vide
+            if(!empty($data->imgprofil)) {
+                $imgsqlname = $data->imgprofil;
 
-            $imgsqlname = $data->imgprofil;
-
-            $filename = $dir . $imgsqlname;
-            // On vérifie que l'image existe
-            if (file_exists(ROOT . $filename)) {
-                return $filename;
+                $filename = $dir . $imgsqlname;
+                // On vérifie que l'image existe
+                if(file_exists(ROOT . $filename)) {
+                    return $filename;
+                } elseif(file_exists(ROOT . $dir . $imgnamealea)) { // Sinon on vérifie que l'image généré à l'inscription existe
+                    return $dir . $imgnamealea;
+                } else { // Sinon on renvoi l'image par defaut
+                    return $dir . 'profil_default.png';
+                }
             } else {
-                return $dir . 'profil_default.png';
+                if(file_exists(ROOT . $dir . $imgnamealea)) { // On vérifie que l'image généré à l'inscription existe
+                    return $dir . $imgnamealea;
+                } else {
+                    return $dir . 'profil_default.png';
+                }
             }
         } else {
             return $dir . 'profil_default.png';

@@ -9,7 +9,7 @@ $userid = $info_profil->id;
 $tweets = Tweets::getInstance($DB_con, $userid);
 /* On récupère tous les tweets d'un utilisateur */
 $alltweets = $tweets->getUserTweets();
-
+/* On affiche ensuite les tweets */
 foreach ($alltweets as $keyPrimary => $tweet) {
 	$href = "/profil.php?user=" . $tweet->pseudo;
 	$user_fullname = $tweet->prenom . " " . $tweet->nom;
@@ -28,8 +28,8 @@ foreach ($alltweets as $keyPrimary => $tweet) {
 	$img_tweet = $tweet->media_tweet;
 
 	$nbr_rt = $tweet->nbr_rt;
-	$nbr_fav = $tweet->nbr_fav;
-	$nbr_reply = $tweet->nbr_reply;
+	$nbr_fav = $tweets->getNbrFav($tweet->id);
+	$nbr_reply = $tweets->getNbrReply($tweet->id);
 
 	require Config::get('view.paths') . '/templates/tweet.template.php';
 }

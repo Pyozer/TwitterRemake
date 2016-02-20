@@ -19,7 +19,6 @@ class Image {
         return self::$_instance;
     }
 
-
     /**
      * @param $namefile - Upload une image en vérifiant différents paramètres
      * @param null $dir
@@ -43,10 +42,10 @@ class Image {
         $errors = array();
         $allerror = array();
 
-        // On verifie si le champ est rempli
-        if(!empty($_FILES[$namefile]['name'])) {
+        // On verifie si le champ est rempli et existe
+        if(!empty($_FILES[$namefile]['name']) || !isset($_FILES[$namefile]['name'])) {
             // Recuperation de l'extension du fichier
-            $extension  = pathinfo($_FILES[$namefile]['name'], PATHINFO_EXTENSION);
+            $extension = pathinfo($_FILES[$namefile]['name'], PATHINFO_EXTENSION);
 
             // On verifie l'extension du fichier
             if(!in_array(strtolower($extension), $tabExt) || !in_array($_FILES[$namefile]['type'], $mimetype)) {
@@ -61,8 +60,8 @@ class Image {
                 $errors['SizeWrong'] = "L'image ne doit pas faire plus de 5 Mo";
             }
             // Parcours du tableau d'erreurs
-            if(!isset($_FILES[$namefile]['error']) && UPLOAD_ERR_OK !== $_FILES[$namefile]['error']) {
-                $errors['ImgError'] = "Une erreur interne a empêché l'upload de l'image :/";
+            if($_FILES[$namefile]['error'] !== UPLOAD_ERR_OK) {
+                $errors['ImgError'] = UploadingException($_FILES[$namefile]['error']);
             }
 
             /* Si il y a eu des erreurs on les retournes, sinon on continu */
@@ -79,7 +78,7 @@ class Image {
                     // On supprime la valeur de la session Imgprofil
                     unset($_SESSION['imgprofil']);
                     // On retourne le nom de l'image
-                    return array('status' => 1, 'imgname' => $nomImage);
+                    return array('UploadOk' => 1, 'imgname' => $nomImage);
                 } else {
                     // Sinon on retourne une erreur
                     $lasterror = array("ErrorMove" => "Problème lors de l'upload ! Réessayez.");
@@ -88,7 +87,6 @@ class Image {
             }
         }
     }
-
 
     /**
      * @param $filename - Supprime une image (fichier)

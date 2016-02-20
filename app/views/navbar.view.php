@@ -20,3 +20,22 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+<!-- Modal pour ajouter un tweet -->
+<div class="modal fade" tabindex="-1" role="dialog" id="newTweet" aria-labelledby="newTweet">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title centered" id="newTweet">Écrire un tweet</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <textarea type="text" rows="3" class="form-control" placeholder="Votre tweet"></textarea>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Tweeter</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -6,11 +6,13 @@ require Config::get('app.controller_paths') . 'Navbar.php';
 ?>
 <div class="page">
     <?php flash(); ?>
-    <div class="row"> <!-- Bannière -->
-        <div class="col-xs-12" style="max-height: 400px;overflow: hidden;">
-            <img src="https://pbs.twimg.com/profile_banners/3383462333/1437334100/1500x500" style="width: 100%;">
+    <?php if(isset($banniere) && !empty($banniere)) { ?>
+        <div class="row"> <!-- Bannière -->
+            <div class="col-xs-12" style="max-height: 400px;overflow: hidden;">
+                <img src="<?= Config::get('image.banniere_path') . $banniere; ?>" style="width: 100%;">
+            </div>
         </div>
-    </div>
+    <?php } ?>
     <div class="row">
         <div class="col-sm-3">
             <div class="userinfo centered" style="padding: 30px 25px 13px 25px;background-color: #2E3F51;color: #fafafa;border-bottom: 1px solid #23303E;">

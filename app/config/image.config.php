@@ -10,5 +10,6 @@ return array(
 	*/
 
 	'imgprofil_path' => '/img/profils/',
+	'banniere_path' => '/img/bannieres/',
 
 );

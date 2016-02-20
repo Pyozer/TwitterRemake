@@ -20,6 +20,14 @@ require Config::get('app.controller_paths') . 'Navbar.php';
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="inputBanniere" class="col-sm-2 control-label"><strong>Bannière</strong></label>
+                            <div class="col-sm-10">
+                                <input type="file" id="inputBanniere" name="inputBanniere">
+                                <input type="text" class="form-control" placeholder="Votre bannière" readonly>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="inputBio" class="col-sm-2 control-label"><strong>Bio</strong></label>
                             <div class="col-sm-10">
                                 <textarea type="text" class="form-control input-lg" id="inputBio" name="inputBio" rows="3" placeholder="Votre bio"><?= $bio ?></textarea>

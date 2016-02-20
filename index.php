@@ -27,6 +27,5 @@ if(!isset($_SESSION['imgprofil'])) {
     $_SESSION['imgprofil'] = $user->getUserImg($_SESSION['userid']);
 }
 
-
 //On importe la vue
 require Config::get('view.paths') . 'index.view.php';

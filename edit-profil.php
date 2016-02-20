@@ -53,6 +53,20 @@ if(isset($_POST['SubmitProfil'])) {
             }
         }
     }
+    /* Si une bannière a été mise */
+    if(isset($_FILES['inputBanniere']['name']) && !empty($_FILES['inputBanniere']['name'])) {
+        $uploadfile = Image::upload_img('inputBanniere', Config::get('image.banniere_path'));
+        if(isset($uploadfile['UploadOk'])) {
+            /* On supprime l'ancienne image */
+            Image::delete($info_profil->imgprofil, Config::get('image.banniere_path'));
+            /* On stock la valeur de la nouvelle img */
+            $data['banniere'] = $uploadfile['imgname'];
+        } else {
+            foreach($uploadfile as $key) {
+                $errors[] = $key;
+            }
+        }
+    }
     /* Si il y a eu des erreurs on les affiches, sinon on fait les modifications */
     if($errors) {
         $allerror = "<ul>";
